@@ -1,28 +1,29 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import { AboutSection, EventsSection, ProjectsSection, TeamSection } from './components/Sections';
+import Footer from './components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [revealed, setRevealed] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen bg-black">
+      <Navbar />
+      <main>
+        <Hero onCollapse={() => setRevealed(true)} />
+
+        {/* Site content appears after the playful collapse */}
+        <section className={`${revealed ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-6'} transition-all duration-700`}>
+          <AboutSection />
+          <EventsSection />
+          <ProjectsSection />
+          <TeamSection />
+        </section>
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
